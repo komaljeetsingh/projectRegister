@@ -7,13 +7,29 @@ const app=express();
 const {storage}=require("../cloudConfig");
 const upload=multer({ storage });
 
+// upload.single("profileimg"),
+
 router.route("/signup")
-.post(upload.single("profileimg"),userController.signUp);
+.post(userController.signUp);
 
 router.route("/login")
 .post(userController.login);
+router.route("/getpro")
+.post(userController.getpro);
 
 router.route("/details")
 .post(addDoctorController.addDoctor);
+
+router.route("/userApp")
+.post(userController.userAppointment);
+
+router.route("/userDelApp")
+.delete(userController.userDelAppointment);
+
+router.route("/updatePassword")
+.patch(userController.updatePassword);
+
+router.route("/updateProfile")
+.patch(upload.single("img"), userController.updateProfile);
 
 module.exports=router;
